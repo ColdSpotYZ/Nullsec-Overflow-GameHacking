@@ -97,20 +97,3 @@ DWORD getAddress(HANDLE hProc, uintptr_t ptr, std::vector<unsigned int> offsets)
     return address;
 }
 
-template <class DataType>
-void writeprocmem(DataType value, DWORD address)
-{
-    std::cout << "Writing " << value << " to " << address << std::endl;
-    WriteProcessMemory(hProc, (LPVOID)address, &value, sizeof(DataType), 0);
-}
-
-template <class DataType>
-DataType readprocmem(DWORD address)
-{
-    DataType returnBuffer;
-
-    std::cout << "Reading from " << address << std::endl;
-    ReadProcessMemory(hProc, (LPVOID)address, &returnBuffer, sizeof(DataType), 0);
-
-    return returnBuffer;
-}

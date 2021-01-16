@@ -29,17 +29,17 @@ int main()
             if (GetAsyncKeyState(VK_NUMPAD1))
             {
                 // Set ammo to 10
-                int ammo = readprocmem<int>(ammoAddr);
+                int ammo = readprocmem<int>(hProc, ammoAddr);
                 std::cout << "Ammo: " << ammo << std::endl;
-                writeprocmem(10, ammoAddr);
+                writeprocmem(hProc, 10, ammoAddr);
 
                 Sleep(1);
             }
             if (GetAsyncKeyState(VK_NUMPAD2))
             {
-                int hp = readprocmem<int>(hpAddr);
+                int hp = readprocmem<int>(hProc, hpAddr);
                 std::cout << "HP: " << hp << std::endl;
-                writeprocmem(100, hpAddr);
+                writeprocmem(hProc, 100, hpAddr);
 
                 Sleep(1);
             }

@@ -12,7 +12,27 @@ DWORD getModule(LPSTR moduleName, DWORD procID, HANDLE& hModuleSnap, MODULEENTRY
 DWORD getAddress(HANDLE hProc, uintptr_t ptr, std::vector<unsigned int> offsets);
 
 template <class DataType>
-void writeprocmem(DataType value, DWORD address);
+void writeprocmem(HANDLE hProc, DataType value, DWORD address);
 
 template <class DataType>
-DataType readprocmem(DWORD address);
+DataType readprocmem(HANDLE hProc, DWORD address);
+
+template<class DataType>
+inline void writeprocmem(HANDLE hProc, DataType value, DWORD address)
+{
+    std::cout << "Writing " << value << " to " << address << std::endl;
+    WriteProcessMemory(hProc, (LPVOID)address, &value, sizeof(DataType), 0);
+}
+
+template<class DataType>
+inline DataType readprocmem(HANDLE hProc, DWORD address)
+{
+    DataType returnBuffer;
+
+    std::cout << "Reading from " << address << std::endl;
+    ReadProcessMemory(hProc, (LPVOID)address, &returnBuffer, sizeof(DataType), 0);
+
+    return returnBuffer;
+}
+
+
