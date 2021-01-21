@@ -9,7 +9,7 @@ MODULEENTRY32 modEntry32;
 
 DWORD baseAddress = NULL;
 
-std::vector<unsigned int> ammoOffsets = { 0x374, 0x14, 0x0 };
+std::vector<unsigned int> ammoOffsets = { 0x150 };
 std::vector<unsigned int> hpOffsets = { 0xF8 };
 
 int main()
@@ -26,23 +26,15 @@ int main()
 
         while (true)
         {
-            if (GetAsyncKeyState(VK_NUMPAD1))
-            {
-                // Set ammo to 10
-                int ammo = readprocmem<int>(hProc, ammoAddr);
-                std::cout << "Ammo: " << ammo << std::endl;
-                writeprocmem(hProc, 10, ammoAddr);
+            int hp = readprocmem<int>(hProc, hpAddr);
+            std::cout << "HP: " << hp << std::endl;
+            writeprocmem(hProc, 1000, hpAddr);
 
-                Sleep(1);
-            }
-            if (GetAsyncKeyState(VK_NUMPAD2))
-            {
-                int hp = readprocmem<int>(hProc, hpAddr);
-                std::cout << "HP: " << hp << std::endl;
-                writeprocmem(hProc, 100, hpAddr);
+            int ammo = readprocmem<int>(hProc, ammoAddr);
+            std::cout << "Ammo: " << ammo << std::endl;
+            writeprocmem(hProc, 10, ammoAddr);
 
-                Sleep(1);
-            }
+
             
         }
     }
