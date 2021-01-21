@@ -28,14 +28,14 @@ int main()
         {
             int hp = readprocmem<int>(hProc, hpAddr);
             std::cout << "HP: " << hp << std::endl;
-            writeprocmem(hProc, 1000, hpAddr);
+            if (GetAsyncKeyState(VK_SPACE))
+                writeprocmem(hProc, 100, hpAddr);
 
             int ammo = readprocmem<int>(hProc, ammoAddr);
             std::cout << "Ammo: " << ammo << std::endl;
-            writeprocmem(hProc, 10, ammoAddr);
+            if (GetAsyncKeyState(VK_NUMPAD1))
+                writeprocmem(hProc, 30, ammoAddr);
 
-
-            
         }
     }
 
